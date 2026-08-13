@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PartnR — Never Golf Alone</title>
+  <meta name="description" content="PartnR helps golfers find compatible playing partners, organize rounds, keep live scorecards, track their golf history and never golf alone." />
+  <style>
+    :root {
+      --green-950: #071b14;
+      --green-900: #0b281d;
+      --green-800: #123b2a;
+      --green-700: #185239;
+      --lime: #b8ff3d;
+      --lime-soft: #d2ff84;
+      --cream: #f5f5ec;
+      --white: #ffffff;
+      --muted: #aebdb5;
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --radius-sm: 14px;
+      --max-width: 1180px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--green-950);
+      color: var(--white);
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(calc(100% - 40px), var(--max-width)); margin: 0 auto; }
+
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(7, 27, 20, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 12px; font-size: 1.45rem; font-weight: 800; letter-spacing: -0.04em; }
+    .brand-icon { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: var(--lime); color: var(--green-950); font-weight: 900; }
+    .nav-links { display: flex; align-items: center; gap: 28px; color: #dce5df; font-size: 0.95rem; }
+    .nav-button { padding: 11px 18px; background: var(--lime); color: var(--green-950); border-radius: 999px; font-weight: 750; }
+
+    .hero { position: relative; overflow: hidden; min-height: 760px; display: flex; align-items: center; padding: 90px 0 70px; }
+    .hero::before {
+      content: ""; position: absolute; width: 700px; height: 700px; right: -200px; top: -200px;
+      background: radial-gradient(circle, rgba(184,255,61,0.16), rgba(184,255,61,0) 70%);
+      pointer-events: none;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 70px; align-items: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; padding: 8px 13px; border: 1px solid rgba(184,255,61,0.35); border-radius: 999px; color: var(--lime); background: rgba(184,255,61,0.08); font-size: 0.85rem; font-weight: 700; margin-bottom: 25px; }
+    h1 { font-size: clamp(3.8rem, 8vw, 7rem); letter-spacing: -0.065em; line-height: 0.92; max-width: 760px; }
+    .hero-highlight { color: var(--lime); }
+    .hero-copy { max-width: 610px; margin-top: 28px; color: #c5d0ca; font-size: 1.18rem; line-height: 1.7; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 35px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 0 23px; border-radius: 999px; font-weight: 780; }
+    .button-primary { background: var(--lime); color: var(--green-950); }
+    .button-secondary { border: 1px solid rgba(255,255,255,0.16); color: var(--white); background: rgba(255,255,255,0.04); }
+    .micro-copy { margin-top: 18px; color: #82968b; font-size: 0.88rem; }
+
+    .phone-shell { width: min(100%, 360px); margin: 0 auto; padding: 11px; border-radius: 42px; background: #101713; border: 1px solid rgba(255,255,255,0.14); box-shadow: 0 40px 80px rgba(0,0,0,0.38), 0 0 70px rgba(184,255,61,0.08); }
+    .phone-screen { min-height: 640px; border-radius: 33px; overflow: hidden; background: linear-gradient(160deg, #153c2d, #081b14 65%); position: relative; }
+    .phone-top { padding: 28px 24px 15px; display: flex; justify-content: space-between; align-items: center; }
+    .phone-logo { font-size: 1.25rem; font-weight: 850; }
+    .avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--lime); display: grid; place-items: center; color: var(--green-950); font-weight: 800; }
+    .phone-content { padding: 18px; }
+    .greeting { color: #a7b8af; font-size: 0.83rem; }
+    .phone-title { margin-top: 5px; font-size: 1.7rem; line-height: 1.15; font-weight: 800; letter-spacing: -0.045em; }
+    .round-card { margin-top: 22px; padding: 20px; border-radius: 22px; background: linear-gradient(145deg, rgba(184,255,61,0.14), rgba(255,255,255,0.05)); border: 1px solid rgba(184,255,61,0.19); }
+    .round-label { color: var(--lime); font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; }
+    .course-name { margin-top: 8px; font-weight: 800; font-size: 1.15rem; }
+    .round-details { margin-top: 5px; color: #9caf9f; font-size: 0.84rem; }
+    .find-button { width: 100%; margin-top: 20px; padding: 15px; border-radius: 15px; background: var(--lime); color: var(--green-950); text-align: center; font-weight: 850; }
+    .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px; }
+    .stat { padding: 15px; border-radius: 17px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.07); }
+    .stat-number { font-size: 1.35rem; font-weight: 850; color: var(--lime); }
+    .stat-label { margin-top: 3px; color: #92a69a; font-size: 0.72rem; }
+
+    section { padding: 105px 0; }
+    .section-kicker { color: var(--lime); text-transform: uppercase; font-weight: 800; letter-spacing: 0.13em; font-size: 0.75rem; margin-bottom: 15px; }
+    .section-title { max-width: 760px; font-size: clamp(2.4rem, 5vw, 4rem); letter-spacing: -0.055em; line-height: 1; }
+    .section-copy { margin-top: 20px; max-width: 700px; color: var(--muted); font-size: 1.05rem; line-height: 1.75; }
+
+    .features { background: var(--cream); color: var(--green-950); }
+    .features .section-copy { color: #5f6d65; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 50px; }
+    .feature-card { padding: 30px; min-height: 250px; border-radius: var(--radius-lg); background: white; border: 1px solid #e5e7df; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .feature-card:hover { transform: translateY(-5px); box-shadow: 0 18px 45px rgba(20,50,35,0.08); }
+    .feature-icon { width: 50px; height: 50px; border-radius: 15px; display: grid; place-items: center; background: #e7ffc2; font-size: 1.3rem; }
+    .feature-card h3 { margin-top: 22px; font-size: 1.25rem; letter-spacing: -0.025em; }
+    .feature-card p { margin-top: 9px; color: #68756e; line-height: 1.65; font-size: 0.95rem; }
+
+    .steps { margin-top: 50px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .step { padding: 28px; border-top: 1px solid rgba(255,255,255,0.12); }
+    .step-number { color: var(--lime); font-size: 0.8rem; font-weight: 800; }
+    .step h3 { margin-top: 20px; font-size: 1.4rem; }
+    .step p { margin-top: 10px; color: var(--muted); line-height: 1.65; }
+
+    .passport { background: var(--green-900); }
+    .passport-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; align-items: center; gap: 70px; }
+    .passport-preview { min-height: 460px; border-radius: 32px; background: linear-gradient(145deg, #efe6cf, #d7ceb7); color: #1d2a22; padding: 30px; transform: rotate(-2deg); box-shadow: 0 35px 70px rgba(0,0,0,0.25); }
+    .passport-heading { font-family: Georgia, serif; font-size: 2rem; text-align: center; }
+    .passport-sub { text-align: center; color: #697069; margin-top: 5px; }
+    .stamp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 28px; }
+    .stamp { aspect-ratio: 1; border: 3px double #526253; border-radius: 50%; display: grid; place-items: center; padding: 20px; text-align: center; font-family: Georgia, serif; opacity: 0.85; }
+
+    .cta { padding: 120px 0; text-align: center; }
+    .cta-panel { padding: 80px 30px; border-radius: 35px; background: radial-gradient(circle at top, rgba(184,255,61,0.19), transparent 60%), var(--green-900); border: 1px solid rgba(184,255,61,0.14); }
+    .cta-panel h2 { font-size: clamp(2.8rem, 6vw, 5rem); letter-spacing: -0.06em; line-height: 0.98; }
+    .cta-panel p { margin: 20px auto 0; max-width: 570px; color: #acbeb3; font-size: 1.05rem; }
+
+    footer { padding: 35px 0; border-top: 1px solid rgba(255,255,255,0.08); color: #84968c; font-size: 0.88rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
+
+    @media (max-width: 900px) {
+      .hero-grid, .passport-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 65px; }
+      .phone-shell { margin-top: 15px; }
+      .feature-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 650px) {
+      .nav-links a:not(.nav-button) { display: none; }
+      .hero { min-height: unset; }
+      h1 { font-size: 4rem; }
+      .feature-grid { grid-template-columns: 1fr; }
+      section { padding: 80px 0; }
+      .passport-preview { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a href="#" class="brand"><span class="brand-icon">P</span>PartnR</a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#passport">Passport</a>
+        <a href="#how">How It Works</a>
+        <a href="#coming-soon" class="nav-button">Coming Soon</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">⛳ Built for golfers</div>
+          <h1>Never Golf <span class="hero-highlight">Alone.</span></h1>
+          <p class="hero-copy">PartnR connects golfers with compatible playing partners, helps fill open spots and brings your rounds, scores, golf history and memories together in one place.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#coming-soon">Join PartnR</a>
+            <a class="button button-secondary" href="#features">Explore the App</a>
+          </div>
+          <p class="micro-copy">Coming soon to iPhone • Built in Canada</p>
+        </div>
+
+        <div class="phone-shell">
+          <div class="phone-screen">
+            <div class="phone-top">
+              <div class="phone-logo">PartnR</div>
+              <div class="avatar">DS</div>
+            </div>
+            <div class="phone-content">
+              <div class="greeting">Good morning</div>
+              <div class="phone-title">Ready to tee off?</div>
+              <div class="round-card">
+                <div class="round-label">Upcoming Round</div>
+                <div class="course-name">Grandview Golf &amp; Country Club</div>
+                <div class="round-details">Monday • 9:10 AM • 1 spot open</div>
+                <div class="find-button">Find a PartnR</div>
+              </div>
+              <div class="stat-grid">
+                <div class="stat"><div class="stat-number">23</div><div class="stat-label">Courses Played</div></div>
+                <div class="stat"><div class="stat-number">84</div><div class="stat-label">Best Score</div></div>
+                <div class="stat"><div class="stat-number">12</div><div class="stat-label">Golf PartnRs</div></div>
+                <div class="stat"><div class="stat-number">18</div><div class="stat-label">Passport Stamps</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="container">
+        <div class="section-kicker">More than a scorecard</div>
+        <h2 class="section-title">Your golf life. One app.</h2>
+        <p class="section-copy">PartnR starts with connecting golfers, then gives you everything you need to organize, play, track and remember your rounds.</p>
+        <div class="feature-grid">
+          <div class="feature-card"><div class="feature-icon">🤝</div><h3>Find Golfers</h3><p>Find compatible golfers nearby based on availability, playing style, skill level and the type of round you want.</p></div>
+          <div class="feature-card"><div class="feature-icon">🏌️</div><h3>Live Scorecards</h3><p>Keep individual and group scores live during the round, including stats, friendly competitions and shared results.</p></div>
+          <div class="feature-card"><div class="feature-icon">📖</div><h3>Golf Passport</h3><p>Build a visual history of the courses you've played and collect unique course stamps along the way.</p></div>
+          <div class="feature-card"><div class="feature-icon">🧬</div><h3>Golf DNA</h3><p>See the patterns that define you as a golfer — your game, preferences, history and playing personality.</p></div>
+          <div class="feature-card"><div class="feature-icon">🧳</div><h3>Travel Mode</h3><p>Visiting another city? Let your golf friends know when you'll be around and available to play.</p></div>
+          <div class="feature-card"><div class="feature-icon">🧠</div><h3>PartnR Caddie</h3><p>Smart assistance built around your clubs, distances, course conditions and the way you actually play.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="container">
+        <div class="section-kicker">Simple by design</div>
+        <h2 class="section-title">Find your next round.</h2>
+        <div class="steps">
+          <div class="step"><div class="step-number">01</div><h3>Tell PartnR when you can play.</h3><p>Post an available round or simply let your friends and nearby golfers know you're free to golf.</p></div>
+          <div class="step"><div class="step-number">02</div><h3>Find the right people.</h3><p>Match with golfers based on location, availability, handicap, playing style and preferences.</p></div>
+          <div class="step"><div class="step-number">03</div><h3>Play. Track. Remember.</h3><p>Keep the score, collect your course stamp and add another round to your PartnR golf history.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="passport" id="passport">
+      <div class="container passport-grid">
+        <div class="passport-preview">
+          <div class="passport-heading">Golf Passport</div>
+          <div class="passport-sub">Places you've played.</div>
+          <div class="stamp-grid">
+            <div class="stamp">FOX HARB'R<br>NOVA SCOTIA</div>
+            <div class="stamp">CABOT LINKS<br>CAPE BRETON</div>
+            <div class="stamp">HIGHLANDS LINKS<br>INGONISH</div>
+            <div class="stamp">GREEN GABLES<br>PEI</div>
+          </div>
+        </div>
+        <div>
+          <div class="section-kicker">Golf Passport</div>
+          <h2 class="section-title">Every course tells a story.</h2>
+          <p class="section-copy">Your PartnR Passport becomes a living record of your golf journey. Play a course, earn its stamp and build a collection that grows every season.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="coming-soon">
+      <div class="container">
+        <div class="cta-panel">
+          <div class="section-kicker">PartnR is coming</div>
+          <h2>Your next round starts here.</h2>
+          <p>We're building PartnR for golfers who want more people to play with and a better way to experience every round.</p>
+          <div class="hero-actions" style="justify-content:center">
+            <a class="button button-primary" href="#">Stay in the Loop</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 PartnR</div>
+      <div>Never Golf Alone.</div>
+      <div>golfpartnr.ca</div>
+    </div>
+  </footer>
+</body>
+</html>
