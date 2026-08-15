@@ -84,6 +84,18 @@
     .feature-icon { width:50px; height:50px; display:grid; place-items:center; border-radius:15px; background:#e7ffc2; font-size:1.3rem }
     .feature h3 { margin-top:20px; font-size:1.23rem; letter-spacing:-.025em }
     .feature p { margin-top:8px; color:#65736b; font-size:.94rem }
+    .roadmap { background:#0f3023 }
+    .roadmap-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:46px }
+    .roadmap-card { padding:clamp(27px,4vw,40px); border:1px solid rgba(255,255,255,.11); border-radius:28px; background:rgba(255,255,255,.04) }
+    .roadmap-card.launch-card { border-color:rgba(184,255,61,.28); background:linear-gradient(145deg,rgba(184,255,61,.11),rgba(255,255,255,.035)) }
+    .roadmap-label { display:inline-flex; padding:7px 12px; border-radius:999px; background:rgba(255,255,255,.08); color:#d8e4dd; font-size:.75rem; font-weight:850; letter-spacing:.08em; text-transform:uppercase }
+    .launch-card .roadmap-label { background:var(--lime); color:var(--ink) }
+    .roadmap-card h3 { margin-top:20px; font-size:1.55rem; letter-spacing:-.035em }
+    .roadmap-card > p { margin-top:8px; color:var(--muted) }
+    .roadmap-list { display:grid; gap:12px; margin-top:25px; list-style:none }
+    .roadmap-list li { position:relative; padding-left:27px; color:#d9e4de }
+    .roadmap-list li::before { content:"✓"; position:absolute; left:0; color:var(--lime); font-weight:900 }
+    .future-card .roadmap-list li::before { content:"→"; color:#9fb2a7 }
     .how { background:var(--ink) }
     .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:46px }
     .step { padding:27px; border-top:1px solid var(--line) }
@@ -109,6 +121,7 @@
     .footer-links a:hover { color:var(--lime) }
     @media (max-width:900px) {
       .hero-grid,.passport-grid { grid-template-columns:1fr }
+      .roadmap-grid { grid-template-columns:1fr }
       .feature-grid { grid-template-columns:1fr 1fr }
       .steps { grid-template-columns:1fr }
       .hero { padding-top:66px }
@@ -135,7 +148,7 @@
     <div class="container nav-inner">
       <a class="brand" href="/" aria-label="PartnR home"><span class="brand-mark" aria-hidden="true">P</span>PartnR</a>
       <div class="nav-links">
-        <a href="#features">Features</a><a href="#how">How it works</a><a href="#passport">Passport</a>
+        <a href="#features">Features</a><a href="#roadmap">Roadmap</a><a href="#how">How it works</a><a href="#passport">Passport</a>
         <a class="pill" href="#launch">Launch updates</a>
       </div>
     </div>
@@ -177,6 +190,43 @@
           <article class="feature"><div class="feature-icon" aria-hidden="true">🧬</div><h3>Know your Golf DNA</h3><p>See the preferences, patterns and playing personality that make your golf game yours.</p></article>
           <article class="feature"><div class="feature-icon" aria-hidden="true">🧳</div><h3>Take PartnR with you</h3><p>Use Travel Mode to let golf friends know when you will be nearby and ready to play.</p></article>
           <article class="feature"><div class="feature-icon" aria-hidden="true">🧠</div><h3>Meet your PartnR Caddie</h3><p>Get smart help based on your clubs, distances, course conditions and the way you actually play.</p></article>
+        </div>
+      </div>
+    </section>
+    <section class="roadmap" id="roadmap" aria-labelledby="roadmap-title">
+      <div class="container">
+        <p class="kicker">Built for launch—and beyond</p>
+        <h2 class="section-title" id="roadmap-title">What’s ready first. What’s coming next.</h2>
+        <p class="section-copy">PartnR launches with the tools golfers need to connect, organize and remember their rounds. Then we’ll keep building toward a smarter, more personal golf companion.</p>
+        <div class="roadmap-grid">
+          <article class="roadmap-card launch-card">
+            <p class="roadmap-label">Available at launch</p>
+            <h3>Your core PartnR experience</h3>
+            <p>Everything you need to find your people and play your next round.</p>
+            <ul class="roadmap-list">
+              <li>Golfer profiles and playing preferences</li>
+              <li>Find compatible golfers nearby</li>
+              <li>Create and join rounds</li>
+              <li>Friends, invitations and messaging</li>
+              <li>Live individual and group scorecards</li>
+              <li>Round history and statistics</li>
+              <li>Golf Passport and course stamps</li>
+              <li>Block, report and privacy controls</li>
+            </ul>
+          </article>
+          <article class="roadmap-card future-card">
+            <p class="roadmap-label">Coming after launch</p>
+            <h3>The road ahead</h3>
+            <p>Deeper insight, smarter assistance and more ways to enjoy the game together.</p>
+            <ul class="roadmap-list">
+              <li>Golf DNA insights</li>
+              <li>PartnR Caddie</li>
+              <li>Travel Mode</li>
+              <li>Deeper performance analytics</li>
+              <li>Expanded course and GPS features</li>
+              <li>More social competitions and achievements</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
